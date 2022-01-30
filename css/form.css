@@ -1,0 +1,50 @@
+.login-form {
+    max-width: 600px;
+    margin: 20px auto 0 auto;
+}
+.login-form input {
+    width: 100%;
+    background-color: #f9f8f8;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #d6d6d6;
+    padding: 10px 10px 10px 35px;
+    margin-bottom: 20px;
+}
+.login-form input[type='submit'] {
+    background-color: #ac1d21;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px;
+    border: 0;
+    margin-bottom: 0px;
+}
+.login-form+p{
+    text-align: center;
+    font-size: 14px;
+    color: #323232
+}
+.login-form+p a {
+    color: #c34646;
+}
+.hidden-input {
+    display: none;
+}
+.login-page {
+    margin-bottom: 300px;
+}
+.logout-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+.logout-submit {
+    display: block; 
+    margin: 7px 0px 0px auto;
+    border: none;
+    background-color: transparent;
+    color: #c34646;
+    text-decoration: underline;
+    text-align: right;
+    cursor: pointer;
+}

@@ -1,0 +1,85 @@
+.single-article {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 25px;
+    margin-top: 25px;
+    color: #323232;
+}
+.single-article-image {
+    width: 100%;
+}
+.single-article-group {
+    width: 100%;
+    
+}
+.single-article-title {
+    
+    font-size: 36px;
+    line-height: 42px;
+    margin-bottom: 10px;
+    font-family: 'Roboto Slab';
+    
+}
+.single-article-abstract {
+    font: normal 18px/28px 'Lora';
+}
+.single-article-body {
+    width: 100%;
+    grid-column: 1 / 3;
+    font: normal 18px/28px 'Lora';
+}
+.single-article-body p {
+    margin-bottom: 30px;
+}
+.h-comments {
+    font: bold 20px/26px 'Roboto Slab';
+    margin-bottom: 12px;
+}
+.span-comments {
+    display: inline-block;
+    margin-right: 30px;
+    font: bold 16px/22px 'Noto Sans';
+    color: #c24646;
+}
+.span-comments img {
+    width: 15px;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+.list-comments {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #d8d7d7;
+}
+.comment-user {
+    padding: 12px 0;
+    border-bottom: 1px solid #d8d7d7;
+    list-style: none;
+}
+.comment-user img {
+    float: left;
+    width: 50px;
+    margin-left: 15px;
+}
+.comment-user div {
+    margin-left: 90px;
+}
+.comment-user div h3 {
+    font: bold 18px/24px;
+    color: #323232;
+
+}
+.comment-user div span {
+    font: normal 13px/16px 'Noto Sans';
+    color: #a5a5a5;
+}
+.comment-user div p {
+    font: normal 16px/24px 'Noto Sans';
+    color: #323232;
+}
+h5 {
+    border-bottom: 1px solid #d8d7d7;
+    padding: 10px 0;
+    text-align: center;
+    font: bold 20px/26px 'Roboto Slab';
+}
