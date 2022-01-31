@@ -1,6 +1,6 @@
 <?php
-
-require "../data/requirements.php";
+session_start();
+require "../data/conn.php";
 
 
 
@@ -12,6 +12,6 @@ if (isset($_POST['username']) && isset($_POST['email'])) {
         $newuser= $conn->getUser($_POST['email']);
         $_SESSION['user'] = $newuser['id'];
         $id = $_GET['id'];
-        header("Location: ../article?id=$id");
+        header("Location: ../pages/article?id=$id");
     }
 }

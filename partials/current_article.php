@@ -1,5 +1,5 @@
 <div class="<?= $article_class; ?>-img">
-    <img src="../<?= $current_article->getPhoto()?>">
+    <img src="../../<?= $current_article->getPhoto()?>">
 </div>
 <div class="<?= $article_class; ?>-body">
     <p>
@@ -10,7 +10,7 @@
     </p>
     <h1>
         <a class="title-color" 
-           href="../article/index.php?id=<?= $current_article->getId(); ?>">
+           href="../../pages/article/index.php?id=<?= $current_article->getId(); ?>">
             <?= $current_article->getTitle()?>
         </a>
     </h1>
@@ -19,6 +19,6 @@
     </p>
     <?php 
         $breadcrumb = $current_article;
-        require "../partials/breadcrumbs.php";
+        require "../../partials/breadcrumbs.php";
     ?>
 </div>

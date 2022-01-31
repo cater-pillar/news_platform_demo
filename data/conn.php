@@ -3,7 +3,7 @@
 class Connection {
   private $conn;
   function __construct() { 
-      $this->conn = new mysqli('localhost', 'root', 'steva', 'news');
+      $this->conn = new mysqli('localhost', 'root', '', 'news');
       if($this->conn->error) {
           die("Greska pri povezivanju: ".$this->conn->error);
       }
