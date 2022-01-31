@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jan 30, 2022 at 11:18 AM
--- Server version: 8.0.27-0ubuntu0.20.04.1
--- PHP Version: 7.4.27
+-- Host: 127.0.0.1
+-- Generation Time: Jan 31, 2022 at 12:25 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -29,15 +28,15 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `article` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `title` varchar(250) DEFAULT NULL,
   `published_at` datetime DEFAULT NULL,
-  `abstract` text,
-  `category_id` int DEFAULT NULL,
-  `town_id` int DEFAULT NULL,
+  `abstract` text DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `town_id` int(11) DEFAULT NULL,
   `photo` varchar(250) DEFAULT NULL,
-  `body` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `body` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `article`
@@ -64,9 +63,9 @@ INSERT INTO `article` (`id`, `title`, `published_at`, `abstract`, `category_id`,
 --
 
 CREATE TABLE `category` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `category`
@@ -88,29 +87,27 @@ INSERT INTO `category` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `comment` (
-  `id` int NOT NULL,
-  `user_id` int DEFAULT NULL,
-  `article_id` int DEFAULT NULL,
-  `body` text,
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `article_id` int(11) DEFAULT NULL,
+  `body` text DEFAULT NULL,
   `published_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `comment`
 --
 
 INSERT INTO `comment` (`id`, `user_id`, `article_id`, `body`, `published_at`) VALUES
-(1, 1, 5, 'Svaka cast na objektivnom izvestavanju!', '2022-01-27 14:56:26'),
-(2, 2, 5, 'Podrška svima!', '2022-01-27 15:02:30'),
-(3, 5, 10, 'Pustam <b>komentar</b>', '2022-01-28 18:06:50'),
-(4, 5, 10, 'Moji komentari su <i>italic</i>', '2022-01-28 18:34:25'),
-(5, 6, 13, 'I treba!!!', '2022-01-28 18:37:52'),
-(6, 7, 7, 'Neka neka i treba da se hapsi', '2022-01-28 18:57:00'),
-(7, 5, 11, 'komentar', '2022-01-28 21:05:55'),
-(8, 5, 3, 'Pih', '2022-01-28 21:06:33'),
-(9, 8, 7, 'Pih', '2022-01-28 21:26:12'),
-(10, 5, 9, 'Lorem ipsum', '2022-01-29 14:50:57'),
-(11, 10, 11, 'jos jedan komentar', '2022-01-30 10:54:49');
+(3, 10, 11, 'Testiranje', '2022-01-28 11:58:08'),
+(4, 10, 11, 'Rekao bih jos nesto cisto testa radi', '2022-01-28 12:10:01'),
+(5, 10, 8, 'I ovde bih ostavio komentar', '2022-01-28 12:18:23'),
+(6, 10, 8, 'Testiram', '2022-01-28 12:19:34'),
+(7, 10, 8, 'Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. Pitam se sta bi se desilo ako bih napisao izuzetno dugacak komentar. ', '2022-01-28 12:20:35'),
+(8, 12, 4, 'Ostavljam komentar', '2022-01-31 11:21:52'),
+(9, 12, 4, 'Ostavljam jos jedan komentar', '2022-01-31 11:22:09'),
+(10, 13, 7, 'I ja cu ostaviti komentar', '2022-01-31 11:24:49'),
+(11, 12, 11, 'Nikad dosta komenara', '2022-01-31 12:23:04');
 
 -- --------------------------------------------------------
 
@@ -119,9 +116,9 @@ INSERT INTO `comment` (`id`, `user_id`, `article_id`, `body`, `published_at`) VA
 --
 
 CREATE TABLE `town` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `town`
@@ -142,27 +139,26 @@ INSERT INTO `town` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `user` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `username` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `password` varchar(250) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `password`) VALUES
-(1, 'Pera', 'pera@email.com', '1234'),
-(2, 'Mika', 'mika@email.com', '1234'),
-(3, 'Jovo', 'jovo@email.com', '1234'),
-(4, 'Stevdzo', 'stevdzo@email.com', '1234'),
-(5, 'laza', 'laza@email.com', '$2y$10$aw7vJ2eup6m4uaShz9b2ceZv7nHSZPK/Ervmf4tcMywRNdXq7/gsS'),
-(6, 'Manda', 'manda@email.com', '$2y$10$o6ghQIs6OciL8BI8GQZzt.wMRVceZGaghh/KHgtB6MLBV9ir3iX0C'),
-(7, 'steva', 'steva@email.com', '$2y$10$qP/8uGnOUstwTi0RpsBvquZcvNRubCtgxIDGBfVOA4JTc1KPfWjmm'),
-(8, 'Mitar', 'mitar@email.com', '$2y$10$G470UdEN7eCZt6AiDr6orubMG4THG0yTiQyjFpCwZ7Kml2Hr0VShq'),
-(9, 'Gaga', 'gaga@email.com', '$2y$10$Quv7Paco7zsNXLNOWLZb4eud1m1p9QdcuPTBIdTOqUQWFLCyFDTFq'),
-(10, 'petar', 'petar@email.com', '$2y$10$v362eD6/2657cIQkvJp3jOWt6f2GAPpwoHl8AAqqbfsgdmZgkXrXi');
+(5, 'Maja', 'maja@email.com', '$2y$10$LomTJ9d0.E2mc01g4L7g2.qmK5llt.NSz4PqToF4LO4ZA.Qziso5W'),
+(6, 'Ika', 'ika@gmail.com', '$2y$10$f3GZXWNUid.t1WRgRxm5y.9jE3MownrbA5uGdnT4ppmQAE6rf8W.q'),
+(7, 'Milica', 'milica@email.com', '$2y$10$rJoPanstbgpF0VKufk8w4OFhoDByBgtO26hM7IADIQpKwCzG8ZBci'),
+(8, 'Laza', 'laza@email.com', '$2y$10$moBUuZzTwH.ZMAOv3DCY7uYyNLH0VvakPpuPapj2NG8CfTIj0Xbm.'),
+(9, 'Bona', 'bona@email.com', '$2y$10$LDoClsu2skGWvwteso0KrOtGFIbq6eKOISiclAdqZD/UAewPCh49a'),
+(10, 'Buba', 'buba@email.com', '$2y$10$INGfEYiePCbaSUlSc7n6WeDYHJbCHPvfhvoHoLurIG9MrxUhdI3uy'),
+(11, 'Konstantin', 'koja@email.com', '$2y$10$9XukjIU1OmmU1huvp9/rqOVcXREWE3/wg0I1jlIJwh1QJRn91NRyS'),
+(12, 'mitar', 'mitar@email.com', '$2y$10$yho.wITTLJrREAaJha6YCu.YSftJWAQPLiXthyaNYcrlwf.BNImle'),
+(13, 'zorana', 'zorana@email.com', '$2y$10$Al3LBGHxdzZjhG/480KAveT/PEk1.ya6UhxC.f9sO3wahtSCD4G/m');
 
 --
 -- Indexes for dumped tables
@@ -215,31 +211,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE `article`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `town`
 --
 ALTER TABLE `town`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
