@@ -1,6 +1,11 @@
 <?php
 session_start();
 
-session_destroy();
+unset($_COOKIE['user']);
+setcookie('user','',time()-3600, '/');
 
-header('Location: ../pages/home');
+session_destroy();
+if(isset($_SERVER['HTTP_REFERER'])) {
+    $previous = $_SERVER['HTTP_REFERER'];
+}
+header("Location: $previous");
