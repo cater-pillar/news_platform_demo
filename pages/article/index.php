@@ -10,6 +10,9 @@ if(isset($one_article)) {
 }
 
 require "../../partials/nav.php";
+if (isset($_COOKIE['user'])) {
+    $_SESSION['user'] = $_COOKIE['user'];
+}
 
 ?>
 <div class="main-container">
@@ -95,6 +98,8 @@ require "../../partials/nav.php";
         <input type="email" name="email" placeholder="Email">
         <input type="password" name="password" 
                placeholder="Lozinka">
+        <input type="checkbox" name="keep" id="keep">
+        <label for="keep">Ostavi me prijavljenog</label>
         <input type="submit" value="Otvori nalog">
     </form>
     <p>Već imate nalog? <a href="../login/">Prijavite se</a></p>
