@@ -39,6 +39,10 @@ header {
     background-color: #c34646;
     color: #fff;
 }
+.nav-admin a {
+    color: #fff;
+    text-decoration: underline;
+}
 .nav-primary {
     background-color: #848485;
     border-top: 2px solid #767679; 
