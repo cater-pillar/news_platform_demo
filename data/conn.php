@@ -3,10 +3,77 @@
 class Connection {
   private $conn;
   function __construct() { 
-      $this->conn = new mysqli('localhost', 'root', '', 'news');
+      $this->conn = new mysqli('localhost', 'root', '');
       if($this->conn->error) {
           die("Greska pri povezivanju: ".$this->conn->error);
       }
+      
+      $this->conn->query("CREATE DATABASE IF NOT EXISTS `news`");
+
+      $this->conn->select_db('news');
+
+      $this->conn->query("CREATE TABLE IF NOT EXISTS `category` 
+              ( `id` INT NOT NULL AUTO_INCREMENT , 
+              `name` VARCHAR(50) NOT NULL , 
+              PRIMARY KEY (`id`), 
+              UNIQUE `cname` (`name`(50)));");
+
+      $this->conn->query("INSERT IGNORE INTO `category`
+              (`name`) VALUES ('Društvo'), ('Ekonomija'), ('Hronika'), 
+              ('Kultura'), ('Politika'), ('Sport'), ('Zabava')");
+
+      
+      $this->conn->query("CREATE TABLE IF NOT EXISTS `town` 
+              ( `id` INT NOT NULL AUTO_INCREMENT , 
+              `name` VARCHAR(50) NOT NULL , 
+              PRIMARY KEY (`id`), 
+              UNIQUE `tname` (`name`(50)));");
+
+      $this->conn->query("INSERT IGNORE INTO `town`
+              (`name`) VALUES ('Leskovac'), ('Niš'), ('Pirot'), 
+              ('Prokuplje'), ('Vranje'), ('Ostali')");
+
+
+      $this->conn->query("CREATE TABLE IF NOT EXISTS `article` 
+              ( `id` INT NOT NULL AUTO_INCREMENT , 
+                `title` VARCHAR(250) NOT NULL,
+                `published_at` DATETIME NOT NULL,
+                `abstract` TEXT NOT NULL,
+                `body` TEXT NOT NULL,
+                `photo` VARCHAR(250) NOT NULL,
+                `category_id` INT NOT NULL,
+                `town_id` INT NOT NULL,
+                PRIMARY KEY (`id`), 
+                FOREIGN KEY (`category_id`) REFERENCES `category`(`id`),
+                FOREIGN KEY (`town_id`) REFERENCES `town`(`id`))");
+
+
+      $this->conn->query("CREATE TABLE IF NOT EXISTS `user` 
+              ( `id` INT NOT NULL AUTO_INCREMENT , 
+              `username` VARCHAR(50) NOT NULL , 
+              `email` VARCHAR(50) NOT NULL , 
+              `password` VARCHAR(250) NOT NULL , 
+              `is_admin` BIT DEFAULT 0,
+              PRIMARY KEY (`id`), 
+              UNIQUE `uname` (`username`(50)));");
+
+      $adminpass = password_hash('1234', PASSWORD_BCRYPT);
+
+      $this->conn->query("INSERT IGNORE INTO `user`
+                              (`username`, `email`, `password`, `is_admin`) VALUES 
+                             ('admin','admin@email.com', '$adminpass', 1)");
+
+      $this->conn->query("CREATE TABLE IF NOT EXISTS `comment` 
+      ( `id` INT NOT NULL AUTO_INCREMENT , 
+        `user_id` INT NOT NULL,
+        `article_id` INT NOT NULL,
+        `published_at` DATETIME NOT NULL,
+        `body` TEXT NOT NULL,
+        PRIMARY KEY (`id`), 
+        FOREIGN KEY (`user_id`) REFERENCES `user`(`id`),
+        FOREIGN KEY (`article_id`) REFERENCES `article`(`id`))");
+
+
   }
 
   function getTowns() {
