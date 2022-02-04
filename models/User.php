@@ -5,6 +5,7 @@ class User {
     private string $username;
     private string $email;
     private string $password;
+    private bool $is_admin = false;
 
     function __construct(int $id, string $username, string $email, string $password)
     {
@@ -45,6 +46,12 @@ class User {
     public function setPassword(string $password)
     {
         $this->password = $password;
+    }
+    public function setAdmin() {
+        $this->is_admin = true;
+    }
+    public function isAdmin() {
+        return $this->is_admin;
     }
 
     static function getUsers(Connection $conn) {
