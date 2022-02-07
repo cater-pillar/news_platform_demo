@@ -44,10 +44,12 @@ if (isset($_COOKIE['user'])) {
     </div>
     <div class="horizontal-banner-red"></div>
     <h2 class="h-comments">KOMENTARI</h2>
+        <?php if(!isset($_SESSION['admin'])) : ?>
         <a class="span-comments" href="#comment">
             <img src="../../images/draw.png" alt="user"/>    
             Pošalji komentar
         </a>
+        <?php endif; ?>
         <span class="span-comments">
             <img src="../../images/speech-bubble-gray.png" alt="edit"/>
             Komentari (<?= count($one_article->getComments()) ?>)
@@ -69,6 +71,7 @@ if (isset($_COOKIE['user'])) {
             </li>    
         <?php endforeach; ?>
     </ul>
+    <?php if(!isset($_SESSION['admin'])) : ?>
     <?php if(isset($_SESSION['user'])) : ?>
     <h5 id="comment">
         Pošalji komentar:
@@ -104,6 +107,7 @@ if (isset($_COOKIE['user'])) {
     </form>
     <p>Već imate nalog? <a href="../login/">Prijavite se</a></p>
     <?php endif ; ?>
+    <?php endif; ?>
     <?php endif ; ?>
     <?php require "../../partials/footer.php" ?>
 </div>

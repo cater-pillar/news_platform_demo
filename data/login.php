@@ -8,7 +8,7 @@ if (isset($_POST['user']) && isset($_POST['password'])) {
     
     if($conn->login($_POST['user'], $_POST['password'])) {
         $newuser= $conn->getUser($_POST['user']);
-        if ($newuser['is_admin'] = 1) {
+        if ($newuser['is_admin'] == 1) {
             if(isset($_POST['keep'])) {
                 setcookie("admin", $newuser['id'], time() +60*60*24*5, '/');
             }
