@@ -45,6 +45,13 @@
     line-height: 36px;
     margin-bottom: 16px;
 }
+.delete-link {
+    float: right;
+    padding: 5px 8px;
+    border-radius: 2px;
+    background-color: #ac1d22;
+    color: #f2f2f2;
+}
 .title-color {
     color: #005689;
 }
