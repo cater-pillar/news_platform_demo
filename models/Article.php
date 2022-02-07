@@ -155,7 +155,7 @@ class Article {
         $query->bind_param("iisssss", $this->category_id, 
                             $this->town_id, $this->title, 
                             $this->published_at, $this->photo, 
-                            $this->abstract, $this->abstract);
+                            $this->abstract, $this->body);
         $query->execute();
     }
 }
