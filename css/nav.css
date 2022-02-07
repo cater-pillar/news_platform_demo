@@ -23,7 +23,7 @@ header {
     margin: 8px 0px;
 }
 .head {
-    color: white;
+    color: #fff;
     
 }
 .logo {
@@ -34,6 +34,14 @@ header {
     max-width: 980px;
     margin-left: auto;
     margin-right: auto; 
+}
+.nav-admin {
+    background-color: #c34646;
+    color: #fff;
+}
+.nav-admin a {
+    color: #fff;
+    text-decoration: underline;
 }
 .nav-primary {
     background-color: #848485;

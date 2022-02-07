@@ -1,4 +1,3 @@
-
 <?php
 
 require "../../data/requirements.php";

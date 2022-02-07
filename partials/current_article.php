@@ -1,5 +1,5 @@
 <div class="<?= $article_class; ?>-img">
-    <img src="../../<?= $current_article->getPhoto()?>">
+    <img src="../<?= $current_article->getPhoto()?>">
 </div>
 <div class="<?= $article_class; ?>-body">
     <p>

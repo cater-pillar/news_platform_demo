@@ -31,6 +31,13 @@
         </div>
     </div>
     <nav>
+        <?php if(isset($_SESSION['admin'])) : ?>
+        <div class="nav-admin">
+            <div class="main-container">
+                Dobrodošao admine | <a href="../newArticle">Dodaj novu vest</a>
+            </div>
+        </div>
+        <?php endif; ?>
         <div class="nav-primary">
             <div class="main-container">
                 <ul class="nav-list">

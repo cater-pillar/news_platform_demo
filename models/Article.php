@@ -21,9 +21,9 @@ class Article {
                          string $photo, 
                          string $abstract, 
                          string $body,
-                         array $categories,
-                         array $towns,
-                         array $comments)
+                         array $categories = [],
+                         array $towns = [],
+                         array $comments = [])
     {
         $this->id = $id;
         $this->category_id = $category_id;
@@ -148,4 +148,14 @@ class Article {
           } return $articles;
     }
 
+    function uploadArticle(Connection $conn) {
+        $query = $conn->getConn()->prepare("INSERT INTO `article` 
+        (`category_id`, `town_id`, `title`, `published_at`, `photo`, `abstract`, `body`)
+        VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $query->bind_param("iisssss", $this->category_id, 
+                            $this->town_id, $this->title, 
+                            $this->published_at, $this->photo, 
+                            $this->abstract, $this->body);
+        $query->execute();
+    }
 }

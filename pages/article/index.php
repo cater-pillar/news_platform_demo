@@ -22,7 +22,7 @@ if (isset($_COOKIE['user'])) {
     </div>
     <?php if(isset($one_article)) : ?>
     <div class="single-article">
-        <img class="single-article-image" src="../../<?= $one_article->getPhoto() ?>" >
+        <img class="single-article-image" src="../<?= $one_article->getPhoto() ?>" >
         <div class="single-article-group">
             <div class="single-article-info">
                 <?= $one_article->getPublished_at() ?> | 

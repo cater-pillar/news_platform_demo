@@ -208,6 +208,14 @@ class Connection {
       }
   }
 
+
+  /**
+   * Get the value of conn
+   */ 
+  public function getConn()
+  {
+    return $this->conn;
+  }
 }
 
 $conn = new Connection();
