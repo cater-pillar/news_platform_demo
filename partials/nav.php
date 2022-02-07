@@ -34,7 +34,7 @@
         <?php if(isset($_SESSION['admin'])) : ?>
         <div class="nav-admin">
             <div class="main-container">
-                Dobrodošao admine | <a href="../newArticle">Dodaj novu vest</a>
+                Dobrodošao admine | <a href="../newArticle">Dodaj novu vest</a> | <a href="../../data/logout.php">Odjavi me</a> 
             </div>
         </div>
         <?php endif; ?>

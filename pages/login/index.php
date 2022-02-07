@@ -4,6 +4,12 @@ require "../../data/requirements.php";
 $page_title = 'Login';
 
 require "../../partials/nav.php";
+if (isset($_COOKIE['admin'])) {
+    $_SESSION['admin'] = $_COOKIE['admin'];
+}
+if(isset($_SESSION['admin'])) {
+    header('Location: ../../pages/home');
+}
 if (isset($_COOKIE['user'])) {
     $_SESSION['user'] = $_COOKIE['user'];
 }
