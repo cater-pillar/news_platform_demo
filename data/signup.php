@@ -2,9 +2,7 @@
 session_start();
 require "../data/conn.php";
 
-if(isset($_SERVER['HTTP_REFERER'])) {
-    $previous = $_SERVER['HTTP_REFERER'];
-}
+
 
 
 if (isset($_POST['username']) && isset($_POST['email'])) {
@@ -17,6 +15,10 @@ if (isset($_POST['username']) && isset($_POST['email'])) {
             setcookie("user", $newuser['id'], time() +60*60*24*5, '/');
         }
         $_SESSION['user'] = $newuser['id'];
-        header("Location: $previous");
+        if(isset($_SERVER['HTTP_REFERER'])) {
+            $previous = $_SERVER['HTTP_REFERER'];
+            header("Location: $previous");
+        }
+        
     }
 }

@@ -158,4 +158,13 @@ class Article {
                             $this->abstract, $this->body);
         $query->execute();
     }
+
+    function deleteArticle($conn) {
+        $query = $conn->getConn()->prepare("DELETE FROM `article` 
+        WHERE `id` = ?");
+        $query->bind_param("i", $this->id);
+        $query->execute();
+      }
+    
+      
 }
