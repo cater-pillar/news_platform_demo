@@ -38,6 +38,7 @@ header {
 .nav-admin {
     background-color: #c34646;
     color: #fff;
+    padding-left: 15px;
 }
 .nav-admin a {
     color: #fff;

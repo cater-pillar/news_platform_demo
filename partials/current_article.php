@@ -7,8 +7,10 @@
             $current_article->getTown() : 
             $current_article->getCategory();
         ?>
-        <? if(isset($_SESSION['admin'])); ?>
-        <a href="../../data/delete_article.php?id=<?= $current_article->getId(); ?>">Obriši vest</a>
+        <?php if(isset($_SESSION['admin'])): ?>
+        <a href="../../data/delete_article.php?id=<?= $current_article->getId(); ?>"
+           class="delete-link">Obriši vest</a>
+        <?php endif; ?>
     </p>
     <h1>
         <a class="title-color" 
