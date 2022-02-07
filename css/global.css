@@ -52,6 +52,13 @@
     background-color: #ac1d22;
     color: #f2f2f2;
 }
+.update-link {
+    float: right;
+    padding: 5px 8px;
+    border-radius: 2px;
+    background-color: #005689;
+    color: #f2f2f2;
+}
 .title-color {
     color: #005689;
 }

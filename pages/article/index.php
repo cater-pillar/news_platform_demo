@@ -22,14 +22,17 @@ if (isset($_COOKIE['user'])) {
     </div>
     <?php if(isset($one_article)) : ?>
     <div class="single-article">
-        <img class="single-article-image" src="../<?= $one_article->getPhoto() ?>" >
+        <img class="single-article-image" 
+             src="../<?= $one_article->getPhoto() ?>" >
         <div class="single-article-group">
             <div class="single-article-info">
                 <?= $one_article->getPublished_at() ?> | 
                 <?= $one_article->getCategory() ?> |
                 <?= $one_article->getTown() ?>
             </div>
-            <h1 class="single-article-title"><?= $one_article->getTitle() ?></h1>
+            <h1 class="single-article-title">
+                <?= $one_article->getTitle() ?>
+            </h1>
             <p class="single-article-abstract">
                 <strong>
                     <?= $one_article->getAbstract() ?>
@@ -58,12 +61,20 @@ if (isset($_COOKIE['user'])) {
     <ul class="list-comments">
         <?php foreach($one_article->getComments() as $comment): ?>
             <li class="comment-user">
+                <?php if(isset($_SESSION['admin']) || 
+                        (isset($_SESSION['user']) && 
+                        $comment->getUser_id() == $_SESSION['user'])): ?>
+                    <a href="../../data/delete_comment.php?id=<?= $comment->getId(); ?>"
+                    class="delete-link">Obriši vest</a>
+                <?php endif; ?>
                 <img src="../../images/user.png" alt="user"/>
                 <div>
                     <h3>
                         <?= $comment->getUser(); ?>
                     </h3>
-                    <span><?= $comment->getPublished_at(); ?></span>
+                    <span>
+                        <?= $comment->getPublished_at(); ?>
+                    </span>
                     <p>
                         <?= $comment->getBody(); ?>
                     </p>
