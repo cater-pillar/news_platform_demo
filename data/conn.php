@@ -99,6 +99,15 @@ class Connection {
     return $query->fetch_all(MYSQLI_ASSOC);
   }
 
+  function getComment($id) {
+    $query = $this->conn->prepare('SELECT * FROM `comment` 
+    WHERE `id` = ?');
+    $query->bind_param("i", $id);
+    $query->execute();
+    $result = $query->get_result();
+    return $result->fetch_assoc();
+  }
+
   function prepareSearch() {
     $search = "%" . $_GET['search'] . "%";
     $query = $this->conn->prepare(

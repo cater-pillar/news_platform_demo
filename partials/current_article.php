@@ -8,6 +8,8 @@
             $current_article->getCategory();
         ?>
         <?php if(isset($_SESSION['admin'])): ?>
+        <a href="../../pages/editArticle/?id=<?= $current_article->getId(); ?>"
+           class="update-link">Ažuriraj vest</a>
         <a href="../../data/delete_article.php?id=<?= $current_article->getId(); ?>"
            class="delete-link">Obriši vest</a>
         <?php endif; ?>
