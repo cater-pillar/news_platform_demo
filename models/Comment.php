@@ -91,4 +91,11 @@ foreach ($conn->getComments() as $result) {
     return $comments;
 
     }
+
+    function deleteComment($conn) {
+        $query = $conn->getConn()->prepare("DELETE FROM `comment` 
+        WHERE `id` = ?");
+        $query->bind_param("i", $this->id);
+        $query->execute();
+      }
 }

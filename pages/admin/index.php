@@ -4,10 +4,10 @@ require "../../data/requirements.php";
 $page_title = 'Admin Login';
 
 require "../../partials/nav.php";
-if (isset($_COOKIE['user'])) {
-    $_SESSION['user'] = $_COOKIE['user'];
+if (isset($_COOKIE['admin'])) {
+    $_SESSION['admin'] = $_COOKIE['admin'];
 }
-if(isset($_SESSION['user'])) {
+if(isset($_SESSION['admin'])) {
     header('Location: ../../pages/home');
 }
 

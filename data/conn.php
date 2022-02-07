@@ -216,6 +216,8 @@ class Connection {
   {
     return $this->conn;
   }
+
+  
 }
 
 $conn = new Connection();
