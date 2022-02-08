@@ -159,6 +159,17 @@ class Article {
         $query->execute();
     }
 
+    function editArticle(Connection $conn) {
+        $query = $conn->getConn()->prepare("UPDATE `article` SET
+        `category_id` = ?, `town_id` = ?, `title` = ?, `published_at` = ?, `photo` = ?, `abstract` = ?, `body` = ?
+        WHERE `id` = ?");
+        $query->bind_param("iisssssi", $this->category_id, 
+                            $this->town_id, $this->title, 
+                            $this->published_at, $this->photo, 
+                            $this->abstract, $this->body, $this->id);
+        $query->execute();
+    }
+
     function deleteArticle($conn) {
         $query = $conn->getConn()->prepare("DELETE FROM `article` 
         WHERE `id` = ?");
