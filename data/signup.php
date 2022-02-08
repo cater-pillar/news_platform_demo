@@ -7,7 +7,7 @@ require "../data/conn.php";
 
 if (isset($_POST['username']) && isset($_POST['email'])) {
     if($conn->proveriKorisnika($_POST['username'], $_POST['email'])) {
-        echo "Korisnik vec postoji.";
+        header("Location: ../pages/signup?error=1");
     } else {
         $conn->signUp($_POST['username'],$_POST['email'],$_POST['password']);
         $newuser= $conn->getUser($_POST['email']);

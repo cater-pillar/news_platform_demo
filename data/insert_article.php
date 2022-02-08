@@ -26,10 +26,10 @@ if(isset($_POST['category'],
                 if(isset($_SERVER['HTTP_REFERER'])) {
                     $previous = $_SERVER['HTTP_REFERER'];
                 }
-                header("Location: $previous");
-            }
+                header("Location: ../pages/newArticle");
+            } 
             
-         }
+         } 
 
 
 

@@ -18,7 +18,7 @@ if(!isset($_SESSION['admin'])) {
 <form action="../../data/insert_article.php" 
       method="post" enctype="multipart/form-data" 
       class="login-form">
-    <select name='category'>
+    <select name='category' required>
         <option value="">Odaberi kategoriju</option>
         <?php foreach ($categories as $category): ?>
             <option value="<?= $category->getId(); ?>">
@@ -26,7 +26,7 @@ if(!isset($_SESSION['admin'])) {
             </option>
         <?php endforeach; ?>
     </select>
-    <select name='town'>
+    <select name='town' required>
         <option value="">Odaberi grad</option>
         <?php foreach ($towns as $town): ?>
             <option value="<?= $town->getId(); ?>">
@@ -34,15 +34,15 @@ if(!isset($_SESSION['admin'])) {
             </option>
         <?php endforeach; ?>
     </select>
-    <input type="text" name="title" 
+    <input type="text" name="title" required
            placeholder="Unesite naslov vesti">
     <label for="photo" class="custom-photo-upload">
         Postavi fotografiju
     </label>
-    <input type="file" id="photo" name="photo" accept="image/*">
-    <textarea name="abstract" placeholder="Unesite apstrakt vesti">
+    <input type="file" id="photo" name="photo" accept="image/*" required>
+    <textarea name="abstract" placeholder="Unesite apstrakt vesti" required>
     </textarea>
-    <textarea name="body" placeholder="Unesi telo vesti">
+    <textarea name="body" placeholder="Unesi telo vesti" required>
     </textarea>
     <input type="submit" value="Prosledi novu vest">
 </form>

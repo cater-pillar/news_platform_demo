@@ -24,7 +24,6 @@ header {
 }
 .head {
     color: #fff;
-    
 }
 .logo {
     height: 100px;
@@ -38,7 +37,7 @@ header {
 .nav-admin {
     background-color: #c34646;
     color: #fff;
-    padding-left: 15px;
+    padding: 4px 0px 2px 15px;
 }
 .nav-admin a {
     color: #fff;

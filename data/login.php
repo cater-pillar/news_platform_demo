@@ -19,14 +19,12 @@ if (isset($_POST['user']) && isset($_POST['password'])) {
                 setcookie("user", $newuser['id'], time() +60*60*24*5, '/');
             }
             $_SESSION['user'] = $newuser['id'];
-            if(isset($_SERVER['HTTP_REFERER'])) {
-                $previous = $_SERVER['HTTP_REFERER'];
-            }
-            header("Location: $previous");
+            
+            header("Location: ../pages/home");
         }
         
     } else {
-        echo "Neispravno korisnicko ime ili lozinka.";
+        header("Location: ../pages/login?error=1");
     }  
         
    
