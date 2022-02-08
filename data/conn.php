@@ -98,6 +98,11 @@ class Connection {
     ORDER BY `published_at` DESC');
     return $query->fetch_all(MYSQLI_ASSOC);
   }
+  function editComment($body, $user, $id) {
+    $query = $this->conn->prepare('UPDATE `comment` SET `body` = ? WHERE `user_id` = ? AND `id` = ?');
+    $query->bind_param('sii', $body, $user, $id);
+    $query->execute();
+  }
 
   function getComment($id) {
     $query = $this->conn->prepare('SELECT * FROM `comment` 
