@@ -40,10 +40,8 @@ if(!isset($_SESSION['admin'])) {
         Postavi fotografiju
     </label>
     <input type="file" id="photo" name="photo" accept="image/*" required>
-    <textarea name="abstract" placeholder="Unesite apstrakt vesti" required>
-    </textarea>
-    <textarea name="body" placeholder="Unesi telo vesti" required>
-    </textarea>
+    <textarea name="abstract" placeholder="Unesite apstrakt vesti" required></textarea>
+    <textarea name="body" placeholder="Unesi telo vesti" required></textarea>
     <input type="submit" value="Prosledi novu vest">
 </form>
 <?php require "../../partials/footer.php" ?>
