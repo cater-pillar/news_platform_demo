@@ -96,7 +96,7 @@ if (isset($_COOKIE['user'])) {
     <form action="../../data/new_comment.php" 
           method="post" 
           class="login-form">
-        <input row="5" type="text" 
+        <input row="5" type="text" required
                name="comment" placeholder="Komentar">
         <input class="hidden-input" name="article_id" 
                value="<?= $_GET['id']?>" type="text" >
@@ -113,10 +113,10 @@ if (isset($_COOKIE['user'])) {
     </h5>
     <form action="../../data/signup.php?id=<?= $_GET['id']; ?>" 
           method="post" class="login-form">
-        <input type="text" name="username" 
+        <input type="text" name="username" required
                placeholder="Korisničko ime">
-        <input type="email" name="email" placeholder="Email">
-        <input type="password" name="password" 
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" required
                placeholder="Lozinka">
         <input type="checkbox" name="keep" id="keep">
         <label for="keep">Ostavi me prijavljenog</label>

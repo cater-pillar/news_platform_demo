@@ -22,10 +22,13 @@ if(isset($_SESSION['user'])) {
 <div class="horizontal-banner"></div>
     <div class="breadcrumbs">
         Login 
+        <?php if(isset($_GET['error']) && $_GET['error'] == 1) : ?>
+            | <span class="login-error">Neispravno korisničko ime ili lozinka!</span>
+        <?php endif ; ?>
     </div>
 <form action="../../data/login.php" method="post" class="login-form">
-        <input type="text" name="user" placeholder="Korisničko ime ili email">
-        <input type="password" name="password" placeholder="Lozinka">
+        <input type="text" name="user" placeholder="Korisničko ime ili email" required>
+        <input type="password" name="password" placeholder="Lozinka" required>
         <input type="checkbox" name="keep" id="keep">
         <label for="keep">Ostavi me prijavljenog</label>
         <input type="submit" value="Prijavi se">

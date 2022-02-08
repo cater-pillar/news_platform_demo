@@ -18,8 +18,8 @@ if(isset($_SESSION['admin'])) {
         Login as Admin
     </div>
 <form action="../../data/login.php" method="post" class="login-form">
-        <input type="text" name="user" placeholder="Korisničko ime ili email">
-        <input type="password" name="password" placeholder="Lozinka">
+        <input type="text" name="user" placeholder="Korisničko ime ili email" required>
+        <input type="password" name="password" placeholder="Lozinka" required>
         <input type="checkbox" name="keep" id="keep">
         <label for="keep">Ostavi me prijavljenog</label>
         <input type="submit" value="Prijavi se">

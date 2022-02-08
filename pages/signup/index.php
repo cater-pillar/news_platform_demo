@@ -21,6 +21,9 @@ if(isset($_SESSION['user'])) {
 <div class="horizontal-banner"></div>
     <div class="breadcrumbs">
         Signup 
+        <?php if(isset($_GET['error']) && $_GET['error'] == 1) : ?>
+            | <span class="login-error">Greška: Korisnik već postoji!</span>
+        <?php endif ; ?>
     </div>
 <form action="../../data/signup.php" method="post" class="login-form">
         <input type="text" name="username" placeholder="Korisničko ime">
@@ -31,6 +34,6 @@ if(isset($_SESSION['user'])) {
         <input type="submit" value="Otvori nalog">
 </form>
 <p class="login-page">Već imate nalog? <a href="../../pages/login/">Prijavite se</a></p>
-<?php require "....//partials/footer.php" ?>
+<?php require "../../partials/footer.php" ?>
 </div>
 </body>

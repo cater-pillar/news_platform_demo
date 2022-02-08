@@ -54,6 +54,9 @@ label {
 .login-page {
     margin-bottom: 300px;
 }
+.login-error {
+    color: #ac1d21;
+}
 .logout-form {
     max-width: 600px;
     margin: 0 auto;
