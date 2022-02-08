@@ -17,7 +17,7 @@ if(!isset($_SESSION['admin'])) {
     <div class="breadcrumbs">
         Izmena vesti
     </div>
-<form action="../../data/insert_article.php" 
+<form action="../../data/edit_article.php?id=<?= $one_article->getId() ?>" 
       method="post" enctype="multipart/form-data" 
       class="login-form">
     <select name='category' required>
@@ -45,11 +45,13 @@ if(!isset($_SESSION['admin'])) {
     <label for="photo" class="custom-photo-upload" >
         Postavi fotografiju
     </label>
-    <input type="file" id="photo" name="photo" accept="image/*" required value="<?= $one_article->getPhoto() ?>">
-    <textarea name="abstract" placeholder="Unesite apstrakt vesti" required rows="7"><?=$one_article->getAbstract()?>
-    </textarea>
-    <textarea name="body" placeholder="Unesi telo vesti" required rows="32"><?=$one_article->getBody()?></textarea>
-    <input type="submit" value="Prosledi novu vest">
+    <input type="file" id="photo" name="photo" accept="image/*" 
+           required value="<?= $one_article->getPhoto() ?>">
+    <textarea name="abstract" placeholder="Unesite apstrakt vesti" 
+           required rows="7"><?=$one_article->getAbstract()?></textarea>
+    <textarea name="body" placeholder="Unesi telo vesti" 
+              required rows="32"><?=$one_article->getBody()?></textarea>
+    <input type="submit" value="Ažuriraj vest">
 </form>
 <?php require "../../partials/footer.php" ?>
 </div>
