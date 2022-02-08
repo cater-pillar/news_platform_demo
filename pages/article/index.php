@@ -64,10 +64,16 @@ if (isset($_COOKIE['user'])) {
                 <?php if(isset($_SESSION['admin']) || 
                         (isset($_SESSION['user']) && 
                         $comment->getUser_id() == $_SESSION['user'])): ?>
+                    <a href="../../pages/editComment/?id=<?= $comment->getId(); ?>"
+                       class="delete-edit-link" title="edit">
+                        <img src="../../images/edit.png" alt="edit" class="delete-edit-img">
+                    </a>
                     <a href="../../data/delete_comment.php?id=<?= $comment->getId(); ?>"
-                    class="delete-link">Obriši vest</a>
+                    class="delete-edit-link" title="delete">
+                        <img src="../../images/delete.png" alt="delete" class="delete-edit-img">
+                    </a>
                 <?php endif; ?>
-                <img src="../../images/user.png" alt="user"/>
+                <img src="../../images/user.png" alt="user" class="user-img"/>
                 <div>
                     <h3>
                         <?= $comment->getUser(); ?>

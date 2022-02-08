@@ -15,8 +15,6 @@
                                $categories, 
                                $towns, 
                                $comments);  
-    } else {
-      echo "Greška: tražena vest nije nađena";
     }
   }
   

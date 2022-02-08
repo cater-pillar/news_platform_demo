@@ -45,19 +45,13 @@
     line-height: 36px;
     margin-bottom: 16px;
 }
-.delete-link {
+.delete-edit-link {
     float: right;
-    padding: 5px 8px;
-    border-radius: 2px;
-    background-color: #ac1d22;
-    color: #f2f2f2;
+    padding: 1px;
+    margin: 5px 8px;
 }
-.update-link {
-    float: right;
-    padding: 5px 8px;
-    border-radius: 2px;
-    background-color: #005689;
-    color: #f2f2f2;
+.delete-edit-img {
+    width: 17px;
 }
 .title-color {
     color: #005689;

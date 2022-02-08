@@ -9,9 +9,13 @@
         ?>
         <?php if(isset($_SESSION['admin'])): ?>
         <a href="../../pages/editArticle/?id=<?= $current_article->getId(); ?>"
-           class="update-link">Ažuriraj vest</a>
+           class="delete-edit-link" title="edit">
+           <img src="../../images/edit.png" alt="edit" class="delete-edit-img">
+        </a>
         <a href="../../data/delete_article.php?id=<?= $current_article->getId(); ?>"
-           class="delete-link">Obriši vest</a>
+           class="delete-edit-link" title="delete">
+           <img src="../../images/delete.png" alt="delete" class="delete-edit-img">
+        </a>
         <?php endif; ?>
     </p>
     <h1>
