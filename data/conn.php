@@ -2,15 +2,18 @@
 
 class Connection {
   private $conn;
+  private $servername = "localhost";
+  private $username = "root";
+  private $password = '';
+  private $dbname = 'news';
   function __construct() { 
-      $this->conn = new mysqli('localhost', 'root', '');
-      if($this->conn->error) {
-          die("Greska pri povezivanju: ".$this->conn->error);
+      try {
+        $this->conn = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
+        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      } catch(PDOException $e) {
+        "Greska pri povezivanju: ". $e->getMessage();
       }
       
-      $this->conn->query("CREATE DATABASE IF NOT EXISTS `news`");
-
-      $this->conn->select_db('news');
 
       $this->conn->query("CREATE TABLE IF NOT EXISTS `category` 
               ( `id` INT NOT NULL AUTO_INCREMENT , 
@@ -77,131 +80,119 @@ class Connection {
   }
 
   function getTowns() {
-    $query = $this->conn->query('SELECT * FROM `town` 
+    $stmt = $this->conn->prepare('SELECT * FROM `town` 
     ORDER BY `id`');
-    return $query->fetch_all(MYSQLI_ASSOC);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
   
   function getCategories() {
-    $query = $this->conn->query('SELECT * FROM `category`');
-    return $query->fetch_all(MYSQLI_ASSOC);
+    $stmt = $this->conn->prepare('SELECT * FROM `category`');
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
   function getUsers() {
-    $query = $this->conn->query('SELECT * FROM `user` 
+    $stmt = $this->conn->query('SELECT * FROM `user` 
     ORDER BY `id`');
-    return $query->fetch_all(MYSQLI_ASSOC);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
   function getComments() {
-    $query = $this->conn->query('SELECT * FROM `comment` 
+    $stmt = $this->conn->query('SELECT * FROM `comment` 
     ORDER BY `published_at` DESC');
-    return $query->fetch_all(MYSQLI_ASSOC);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
   function editComment($body, $user, $id) {
-    $query = $this->conn->prepare('UPDATE `comment` SET `body` = ? WHERE `user_id` = ? AND `id` = ?');
-    $query->bind_param('sii', $body, $user, $id);
-    $query->execute();
+    $query = $this->conn->prepare('UPDATE `comment` SET `body` = :body WHERE `user_id` = :user_id AND `id` = :id');
+    $query->execute(['body' => $body, 'user_id' => $user, 'id' => $id]);
   }
 
   function getComment($id) {
-    $query = $this->conn->prepare('SELECT * FROM `comment` 
-    WHERE `id` = ?');
-    $query->bind_param("i", $id);
-    $query->execute();
-    $result = $query->get_result();
-    return $result->fetch_assoc();
+    $stmt = $this->conn->prepare('SELECT * FROM `comment` 
+    WHERE `id` = :id');
+    $stmt->execute(['id' => $id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
   }
 
   function prepareSearch() {
     $search = "%" . $_GET['search'] . "%";
-    $query = $this->conn->prepare(
+    $stmt = $this->conn->prepare(
       'SELECT * FROM `article` WHERE 
-      `title` LIKE ? OR `abstract` LIKE ? OR `body` LIKE ? 
+      `title` LIKE :title OR `abstract` LIKE :abstract OR `body` LIKE :body 
       ORDER BY `published_at` DESC'
       );
-    $query->bind_param("sss", $search, $search, $search);
-    $query->execute();
-    $result = $query->get_result();
-    return $result->fetch_all(MYSQLI_ASSOC);
+      $stmt->execute(['title' => $search, 'abstract' => $search, 'body' => $search]);
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
   } 
 
   function prepareByCategory() {
     $category_id = $_GET['category'];
-    $query = $this->conn->prepare(
+    $stmt = $this->conn->prepare(
       'SELECT * FROM `article` WHERE 
-      `category_id` = ? ORDER BY `published_at` DESC'
+      `category_id` = :category_id ORDER BY `published_at` DESC'
       );
-    $query->bind_param("i", $category_id);
-    $query->execute();
-    $result = $query->get_result();
-    return $result->fetch_all(MYSQLI_ASSOC);
+      $stmt->execute(['category_id' => $category_id]);
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
   function prepareByTown() {
     $town_id = $_GET['town'];
-    $query = $this->conn->prepare(
+    $stmt = $this->conn->prepare(
       'SELECT * FROM `article` WHERE 
-      `town_id` = ? ORDER BY `published_at` DESC');
-    $query->bind_param("i", $town_id);
-    $query->execute();
-    $result = $query->get_result();
-    return $result->fetch_all(MYSQLI_ASSOC);
+      `town_id` = :town_id ORDER BY `published_at` DESC');
+    $stmt->execute(['town_id' => $town_id]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
   }
 
   function prepareAll() {
-    $query = $this->conn->query(
+    $stmt = $this->conn->query(
       'SELECT * FROM `article` ORDER BY `published_at` DESC'
     );
-    return $query->fetch_all(MYSQLI_ASSOC);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
   function getOneArticle() {
-    $query = $this->conn->prepare(
-      'SELECT * FROM `article` WHERE `id` = ?'
+    $stmt = $this->conn->prepare(
+      'SELECT * FROM `article` WHERE `id` = :id'
     );
-    $query->bind_param("i", $_GET['id']);
-    $query->execute();
-    $result = $query->get_result();
-    return $result->fetch_assoc();
+    $stmt->execute(['id' => $_GET['id']]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
   }
   
 
   private function prepareSelectUser() {
       return $this->conn->prepare(
         "SELECT * FROM `user` WHERE 
-        `username`=? AND `email`=?"
+        `username`= :username AND `email`= :email"
         );
   }
 
   function proveriKorisnika($user, $email) {
       
       $prepared = $this->prepareSelectUser();
-      $prepared->bind_param("ss",$user,$email);
-      $prepared->execute();
-      return $prepared->get_result()->num_rows == 1;
+      $prepared->execute(['username' => $user, 'email' => $email]);
+      return $prepared->fetchAll(PDO::FETCH_ASSOC)/*->num_rows == 1*/;
   }
 
   function getUser($email) {
-    $query = $this->conn->prepare(
-      'SELECT * FROM `user` WHERE `email` = ? OR `username` = ?'
+    $stmt = $this->conn->prepare(
+      'SELECT * FROM `user` WHERE `email` = :email OR `username` = :user'
     );
-    $query->bind_param("ss", $email, $email);
-    $query->execute();
-    $result = $query->get_result();
-    return $result->fetch_assoc();
+    $stmt->execute(['email' => $email, 'user' => $email]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
   }
 
   function signUp($user, $email, $password) {
     $hash_pass = password_hash($password, PASSWORD_BCRYPT);
-    $query = $this->conn->prepare(
-      'INSERT INTO `user` (`username`, `email`, `password`) VALUES (?,?,?)'
+    $stmt = $this->conn->prepare(
+      'INSERT INTO `user` (`username`, `email`, `password`) VALUES (:username, :email, :pass)'
     );
-    $query->bind_param("sss", $user, $email, $hash_pass);
-    try {
-      $query->execute();} catch(Exception $e) {
-        $e->getMessage();
-      }
+    $stmt->execute(['username' => $user, 'email' => $email, 'pass' => $hash_pass]);
   }
 
   function login($email, $password) {
@@ -211,15 +202,11 @@ class Connection {
 
   function newComment($user_id, $article_id, $comment) {
     $date = date("Y-m-d G:i:s");
-    $query = $this->conn->prepare(
+    $stmt = $this->conn->prepare(
       'INSERT INTO `comment` 
-      (`user_id`, `article_id`, `body`, `published_at`) VALUES (?,?,?,?)'
+      (`user_id`, `article_id`, `body`, `published_at`) VALUES (:user_id, :article_id, :body, :published_at)'
     );
-    $query->bind_param("iiss", $user_id, $article_id, $comment, $date);
-    try {
-      $query->execute();} catch(Exception $e) {
-        $e->getMessage();
-      }
+    $stmt->execute(['user_id' => $user_id, 'article_id' => $article_id, 'body' => $comment, 'published_at' => $date]);
   }
 
 
