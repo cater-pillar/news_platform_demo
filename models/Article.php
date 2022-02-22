@@ -151,30 +151,40 @@ class Article {
     function uploadArticle(Connection $conn) {
         $query = $conn->getConn()->prepare("INSERT INTO `article` 
         (`category_id`, `town_id`, `title`, `published_at`, `photo`, `abstract`, `body`)
-        VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $query->bind_param("iisssss", $this->category_id, 
-                            $this->town_id, $this->title, 
-                            $this->published_at, $this->photo, 
-                            $this->abstract, $this->body);
-        $query->execute();
+        VALUES (:category_id, :town_id, :title, :published_at, :photo, :abstract, :body)");
+        $query->execute(['category_id'=>$this->category_id, 
+                            'town_id'=>$this->town_id, 
+                            'title'=>$this->title, 
+                            'published_at'=>$this->published_at, 
+                            'photo'=>$this->photo, 
+                            'abstract'=>$this->abstract,
+                            'body'=>$this->body]);
     }
 
     function editArticle(Connection $conn) {
         $query = $conn->getConn()->prepare("UPDATE `article` SET
-        `category_id` = ?, `town_id` = ?, `title` = ?, `published_at` = ?, `photo` = ?, `abstract` = ?, `body` = ?
-        WHERE `id` = ?");
-        $query->bind_param("iisssssi", $this->category_id, 
-                            $this->town_id, $this->title, 
-                            $this->published_at, $this->photo, 
-                            $this->abstract, $this->body, $this->id);
-        $query->execute();
+        `category_id` = :category_id, 
+        `town_id` = :town_id, 
+        `title` = :title, 
+        `published_at` = :published_at, 
+        `photo` = :photo, 
+        `abstract` = :abstract, 
+        `body` = :body
+        WHERE `id` = :id");
+        $query->execute(['category_id'=>$this->category_id, 
+                         'town_id'=>$this->town_id, 
+                         'title'=>$this->title, 
+                         'published_at'=>$this->published_at, 
+                         'photo'=>$this->photo, 
+                         'abstract'=>$this->abstract,
+                         'body'=>$this->body,
+                         'id'=>$this->id]);
     }
 
     function deleteArticle($conn) {
-        $query = $conn->getConn()->prepare("DELETE FROM `article` 
-        WHERE `id` = ?");
-        $query->bind_param("i", $this->id);
-        $query->execute();
+        $stmt = $conn->getConn()->prepare("DELETE FROM `article` 
+        WHERE `id` = :id");
+        $stmt->execute(['id' => $this->id]);
       }
     
       
